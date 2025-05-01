@@ -713,6 +713,7 @@
         event.preventDefault(); // Verhindert das Standard-Kontextmenü
 
         const notizen = document.getElementById('notizen');
+        const counter = document.getElementById('charCount');
         const activeTab = document.querySelector('.tab-content.active').dataset.tab; // Aktiver Tab
         const textContent = event.target.textContent.trim();
         let textToInsert;
@@ -731,6 +732,21 @@
 
         notizen.value = currentValue.slice(0, start) + textToInsert + currentValue.slice(end);
         notizen.selectionStart = notizen.selectionEnd = start + textToInsert.length;
+
+        // Aktualisiere den Zeichenzähler
+        const length = notizen.value.length;
+        counter.textContent = `${length}/255`;
+
+        // Farben je nach Länge setzen
+        counter.classList.remove('green', 'yellow', 'red');
+        const percentage = (length / 255) * 100;
+        if (percentage <= 33) {
+            counter.classList.add('green');
+        } else if (percentage <= 80) {
+            counter.classList.add('yellow');
+        } else {
+            counter.classList.add('red');
+        }
 
         notizen.focus(); // Setzt den Fokus zurück auf die Notizbox
     });
