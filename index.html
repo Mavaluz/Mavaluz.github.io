@@ -163,7 +163,7 @@
 
     .grid-row-1 {
         display: grid;
-        grid-template-columns: 190px auto;
+        grid-template-columns: auto auto;
         grid-template-rows: 40px auto;
     }
 
@@ -172,9 +172,12 @@
         border: 2px solid #ccc;
         border-radius: 10px 10px 0 0;
         border-bottom: none;
-        justify-content: center;
+        width: fit-content;
+        justify-content: left;
+        padding-left: 2px;
         align-items: center;
         grid-column: 1/2;
+        padding-right: 8px;
     }
 
     #volume-icon {
@@ -190,12 +193,13 @@
 
     #volume-slider {
         cursor: pointer;
+        
     }
 
     .grid-tabs {
         display: flex;
         grid-column: 2/3;
-        justify-content: center;
+        justify-content: left;
         align-items: center;
     }
 
@@ -383,7 +387,7 @@
             Du kannst auch fließend in einer Nachricht auf mich wechseln.
             <b><span style="color: hwb(180 7% 35%); text-shadow: 2px 2px 2px #000;">(quack)</span></b>
             </div>
-            <p><b><span style="color: hsl(216, 100%, 50%);">Pro-Tip:</span></b> Stimmen und Sounds kannst du per klick mit der rechten Maustaste direkt in den Notizblock, den Du direkt hier drunter findest, einfügen. Viel Spaß!</p>
+            <p><b><span style="color: hsl(216, 100%, 50%);">Pro-Tip:</span></b> Stimmen und Sounds kannst du per klick mit der rechten Maustaste aus der ganz unten zu findenden Datenbank, direkt in den Notizblock, den Du direkt hier drunter findest, einfügen. Viel Spaß!</p>
 
           
         </div>
@@ -408,7 +412,7 @@
         <button class="copy-button" onclick="copyToClipboard()" title="Copypasta">
             <img src="grafiken/copypasta.png" alt="Kopieren" class="copy-icon">
           </button>
-        <textarea id="notizen" maxlength="255" placeholder="Notizblock zum vorschreiben deiner Nachricht - rechts oben kopieren." spellcheck="false"></textarea>
+        <textarea id="notizen" maxlength="255" placeholder="Das ist der Notizblock zum vorschreiben deiner Nachricht - rechts oben kopieren." spellcheck="false"></textarea>
       </div>
       <script>
         const textarea = document.getElementById('notizen');
@@ -433,7 +437,7 @@
       
         function copyToClipboard() {
           navigator.clipboard.writeText(textarea.value).catch(err => {
-            console.error("Fehler beim Kopieren:", err);
+            /* console.error("Fehler beim Kopieren:", err); */
           });
         }
       </script>
@@ -725,6 +729,13 @@
             textToInsert = `(${textContent}) `; // Soundname in Klammern
         }
 
+        // Prüfe, ob die maximale Länge überschritten wird
+        const currentLength = notizen.value.length;
+        if (currentLength + textToInsert.length > 255) {
+            /*alert('Maximale Zeichenanzahl von 255 erreicht!');*/
+            return;
+        }
+
         // Füge den Text an der aktuellen Cursorposition ein
         const start = notizen.selectionStart;
         const end = notizen.selectionEnd;
@@ -748,7 +759,7 @@
             counter.classList.add('red');
         }
 
-        notizen.focus(); // Setzt den Fokus zurück auf die Notizbox
+         notizen.focus(); // Setzt den Fokus zurück auf die Notizbox
     });
 });
 
