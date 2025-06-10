@@ -87,7 +87,7 @@
     
     #notizen {
        width: 100%;
-       height: 170px;
+       height: 275px;
         padding: 30px 10px 10px 10px; /* oben Platz für den Zähler */
         /* font-size: 1rem; */
       border-radius: 10px;
@@ -408,11 +408,11 @@
         
     </div>
     <div class="notizen-wrapper">
-        <span class="counter" id="charCount">0/255</span>
+        <span class="counter" id="charCount">0/500</span>
         <button class="copy-button" onclick="copyToClipboard()" title="Copypasta">
             <img src="grafiken/copypasta.png" alt="Kopieren" class="copy-icon">
           </button>
-        <textarea id="notizen" maxlength="255" placeholder="Das ist der Notizblock zum vorschreiben deiner Nachricht - rechts oben kopieren." spellcheck="false"></textarea>
+        <textarea id="notizen" maxlength="500" placeholder="Das ist der Notizblock zum vorschreiben deiner Nachricht - rechts oben kopieren." spellcheck="false"></textarea>
       </div>
       <script>
         const textarea = document.getElementById('notizen');
@@ -420,12 +420,12 @@
       
         textarea.addEventListener('input', () => {
           const length = textarea.value.length;
-          counter.textContent = `${length}/255`;
+          counter.textContent = `${length}/500`;
       
           // Farben je nach Länge setzen
           counter.classList.remove('green', 'yellow', 'red');
       
-          const percentage = (length / 255) * 100;
+          const percentage = (length / 500) * 100;
           if (percentage <= 33) {
             counter.classList.add('green');
           } else if (percentage <= 80) {
@@ -733,7 +733,7 @@
 
         // Prüfe, ob die maximale Länge überschritten wird
         const currentLength = notizen.value.length;
-        if (currentLength + textToInsert.length > 255) {
+        if (currentLength + textToInsert.length > 500) {
             /*alert('Maximale Zeichenanzahl von 255 erreicht!');*/
             return;
         }
@@ -748,11 +748,11 @@
 
         // Aktualisiere den Zeichenzähler
         const length = notizen.value.length;
-        counter.textContent = `${length}/255`;
+        counter.textContent = `${length}/500`;
 
         // Farben je nach Länge setzen
         counter.classList.remove('green', 'yellow', 'red');
-        const percentage = (length / 255) * 100;
+        const percentage = (length / 500) * 100;
         if (percentage <= 33) {
             counter.classList.add('green');
         } else if (percentage <= 80) {
